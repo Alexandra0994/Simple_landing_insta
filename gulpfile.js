@@ -76,6 +76,12 @@ gulp.task('dev', gulp.series(
 	gulp.parallel( watch)					// then run the local web server and start watching the files for changes.
 ));
 
+
+gulp.task('build', gulp.series(
+    clean,									// delete smelly old "src/index.html".									// then create fresh new "src/index.html" from pieces inside the "./src/index/" subfolder									// then kill the destination folder.
+	gulp.parallel(minCss, minJs, minImg),		// then do all these tasks in parallel.								// delete "src/index.html" again (to avoid confusion).
+	gulp.parallel( watch)										// delete "src/index.html" again (to avoid confusion).
+));
 //exports.default = series(clean, gulp.parallel(minCss, minJs, minImg));
 //exports.dev = series(clean, minCss, minJs, minImg ,watch);
 
@@ -84,3 +90,5 @@ gulp.task('dev', gulp.series(
 
 
 //npm run dev
+//npm run build — збудувати все перед комітом (те саме, шо gulp build)
+//npm run publish
